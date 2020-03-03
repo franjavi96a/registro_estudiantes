@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using RegistroEstudiantes.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RegistroEstudiantes.Models;
 
 namespace RegistroEstudiantes
 {
@@ -33,6 +34,9 @@ namespace RegistroEstudiantes
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddDbContext<RegistroEstudiantesContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
